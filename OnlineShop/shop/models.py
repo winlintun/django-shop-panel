@@ -28,3 +28,16 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class Order(models.Model):
+    status = (
+        ('pending', 'Pending'),
+        ('out of delivery', 'Out of Delivery'),
+        ('delivered', 'Delivered')
+    )
+
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=200, null=True, choices=status)
