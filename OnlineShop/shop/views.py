@@ -1,3 +1,4 @@
+from ast import Or
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Customer, Product, Order
@@ -6,9 +7,17 @@ from .models import Customer, Product, Order
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
+
+    total = orders.count()
+    delivered = Order.objects.filter(status='delivered').count()
+    pending = Order.objects.filter(status='pending').count()
+
     return render(request, 'shop/home.html', {
         'customers': customers,
-        'orders': orders
+        'orders': orders,
+        'total': total,
+        'delivered': delivered,
+        'pending': pending
     })
 
 def customer(request):
