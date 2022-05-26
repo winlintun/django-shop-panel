@@ -12,3 +12,19 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
+class Product(models.Model):
+    category = (
+        ('indoor', 'In Door'),
+        ('outdoor', "Out Door")
+    )
+
+    name = models.CharField(max_length=200, null=True)
+    price = models.FloatField(null=True)
+    category = models.CharField(max_length=200, null=True, choices=category)
+    description = models.TextField(help_text="Detail Product", null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+
+    def __str__(self) -> str:
+        return self.name
