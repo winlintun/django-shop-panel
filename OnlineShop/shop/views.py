@@ -20,8 +20,17 @@ def home(request):
         'pending': pending
     })
 
-def customer(request):
-    return render(request, 'shop/customer.html')
+def customer(request, user_id):
+    customer = Customer.objects.get(pk=user_id)
+
+    orders = customer.order_set.all()
+    order_count = orders.count()
+
+    return render(request, 'shop/customer.html', {
+        'customer': customer,
+        'orders': orders,
+        'order_count': order_count
+    })
 
 def product(request):
     products = Product.objects.all()
