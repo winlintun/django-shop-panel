@@ -19,7 +19,6 @@ class Tag(models.Model):
         return self.name
 
 
-
 class Product(models.Model):
     category = (
         ('indoor', 'In Door'),
@@ -31,7 +30,7 @@ class Product(models.Model):
     category = models.CharField(max_length=200, null=True, choices=category)
     description = models.TextField(help_text="Detail Product", null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
-
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self) -> str:
         return self.name
