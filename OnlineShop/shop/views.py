@@ -10,4 +10,7 @@ def customer(request):
     return render(request, 'shop/customer.html')
 
 def product(request):
-    return render(request, 'shop/product.html')
+    products = Product.objects.all()
+    return render(request, 'shop/product.html', {
+        'products': products
+    })
