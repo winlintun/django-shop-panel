@@ -1,7 +1,6 @@
-from ast import Or
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Customer, Product, Order
+from .forms import OrderForm
 # Create your views here.
 
 def home(request):
@@ -36,4 +35,15 @@ def product(request):
     products = Product.objects.all()
     return render(request, 'shop/product.html', {
         'products': products
+    })
+
+def orderCreate(request):
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('shop:home')
+    return render(request, 'shop/order_form.html', {
+        'form': form
     })
