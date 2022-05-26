@@ -47,3 +47,15 @@ def orderCreate(request):
     return render(request, 'shop/order_form.html', {
         'form': form
     })
+
+def order_update(request, orderId):
+    order = Order.objects.get(pk=orderId)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('shop:home')
+    return render(request, 'shop/order_form.html', {
+        'form': form
+    })

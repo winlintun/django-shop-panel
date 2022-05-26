@@ -86,7 +86,7 @@
                     <td>{{ order.product.name }}</td>
                     <td>{{ order.created_at }}</td>
                     <td>{{ order.status }}</td>
-                    <td><a href="" class="btn btn-success">Update</a></td>
+                    <td><a href="{% url 'shop:order-update' order.id %}" class="btn btn-success">Update</a></td>
                     <td><a href="" class="btn btn-danger">Delete</a></td>
                 </tr>
                 {% endfor %}
