@@ -72,7 +72,7 @@
         <h5 class="text-center">LAST 5 ORDERS</h5>
         <hr>
         <div class="card card-body">
-            <a href="{% url 'shop:order-create' %}" class="btn btn-primary btn-sm btn-block">Create Order</a>
+            {% comment %} <a href="{% url 'shop:order-create' customer.id %}" class="btn btn-primary btn-sm btn-block">Create Order</a> {% endcomment %}
             <table class="table table-sm">
                 <tr>
                     <th>Product</th>
