@@ -54,7 +54,7 @@ def orderCreate(request, customerId):
 
 def order_update(request, orderId):
     order = Order.objects.get(pk=orderId)
-    form = OrderForm(instance=order)
+    form = OrderForm(instance=order, queryset=Order.objects.none())
     if request.method == 'POST':
         form = OrderForm(request.POST, instance=order)
         if form.is_valid():
