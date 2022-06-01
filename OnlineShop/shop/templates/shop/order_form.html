@@ -7,7 +7,12 @@
         {{ form }} <hr>
     {% endfor %} {% endcomment %}
 
-    {{ formset.as_p }} <!-- This is right way -->
+    {% if formset %}
+        {{ formset.as_p }} <!-- This is right way -->
+    {% endif %}
+    {% if form %}
+        {{ form.as_p }}
+    {% endif %}
     <input type="submit" value="Add order">
 </form>
 {% endblock%}
