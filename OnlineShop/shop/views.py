@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import Customer, Product, Order
-from .forms import OrderForm
+from .forms import OrderForm, RegisterForm
 from django.forms import inlineformset_factory
 from .filters import OrderFilter
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 
@@ -82,4 +83,17 @@ def order_delete(request, orderId):
         return redirect('shop:home')
     return render(request, 'shop/order_delete.html', {
         'order': order
+    })
+
+
+def register(request):
+    form = RegisterForm()
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('shop:home')
+
+    return render(request, 'shop/register.html', {
+        'form': form
     })
