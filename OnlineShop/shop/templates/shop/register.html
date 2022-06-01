@@ -1,5 +1,5 @@
 {% extends 'shop/base.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
     <form action="" method='POST'>
         {% csrf_token %} 
@@ -7,8 +7,10 @@
         {% for input in form %}
             <div class="mb-3">
                 {{ input.label }}
-                {{ input }}  
-
+                {{ input| add_class:'form-control' }}  
+                <div class="text-danger">
+                    {{ input.errors }}
+                </div>
             </div>
         {% endfor %}
         {% comment %} {{ form.as_p }} {% endcomment %}
